@@ -6,7 +6,6 @@ import Swal from 'sweetalert2';
 const Scan = () => {
 
     const [scanSuccess, setScanSuccess] = useState(false);
-    const [isCameraFront, setIsCameraFront] = useState(false);
 
     const handleScan = async (data) => {
         if(data?.text) {
@@ -35,10 +34,14 @@ const Scan = () => {
         console.log(err);
     }
 
+    const isIOS = Platform.OS === 'ios';
+
+    const facingMode = isIOS ? 'environment' : 'user'; 
+
 
   return (
     <Section className={`min-h-screen flex flex-col gap-4 bg-pink-400 flex justify-center items-center`}>     
-        <h1>SCAN QR V4</h1>  
+        <h1>SCAN QR V5</h1>  
         <div className='w-[full] h-[30rem] overflow-hidden'>
             <QrReader
                 delay={ 100 }
@@ -47,13 +50,9 @@ const Scan = () => {
                 }}
                 onError={ handleErr }
                 onScan={ handleScan }
-                // Get the phone's back camera by default
-                facingMode={isCameraFront ? 'user' : 'environment'}
+                facingMode={facingMode}
             />
         </div>
-        <button
-            onClick={() => setIsCameraFront(!isCameraFront)}
-        >Change Camera</button>
     </Section>
   )
 }
