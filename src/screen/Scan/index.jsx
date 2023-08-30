@@ -52,10 +52,10 @@ const Scan = () => {
                     isCamera ? 'environment' : 'user'
                 }
             />
-            <button
-                onClick={ () => setIsCamera(!isCamera) }
-            >Change</button>
         </div>
+        <button
+            onClick={ () => setIsCamera(!isCamera) }
+        >Change</button>
     </Section>
   )
 }
