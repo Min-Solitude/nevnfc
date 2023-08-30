@@ -47,7 +47,7 @@ const Scan = () => {
                 onError={ handleErr }
                 onScan={ handleScan }
                 // Get the phone's back cam
-                facingMode='rear'
+                facingMode='front'
             />
         </div>
     </Section>
