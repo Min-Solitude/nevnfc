@@ -37,7 +37,7 @@ const Scan = () => {
 
   return (
     <Section className={`min-h-screen flex flex-col gap-4 bg-pink-400 flex justify-center items-center`}>     
-        <h1>SCAN QR</h1>  
+        <h1>SCAN QR V3</h1>  
         <div className='w-[full] h-[30rem] overflow-hidden'>
             <QrReader
                 delay={ 100 }
@@ -47,7 +47,7 @@ const Scan = () => {
                 onError={ handleErr }
                 onScan={ handleScan }
                 // Get the phone's back cam
-                facingMode='user'
+                facingMode='rear'
             />
         </div>
     </Section>
