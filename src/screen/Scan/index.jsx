@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 const Scan = () => {
 
     const [scanSuccess, setScanSuccess] = useState(false);
+    const [isCamera, setIsCamera] = useState(false);
 
     const handleScan = async (data) => {
         if(data?.text) {
@@ -34,16 +35,6 @@ const Scan = () => {
         console.log(err);
     }
 
-    const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent);
-
-    let facingMode;
-
-    if (isIOS) {
-    facingMode = 'environment';
-    } else {
-    facingMode = 'user';
-    }
-
 
   return (
     <Section className={`min-h-screen flex flex-col gap-4 flex justify-center items-center`}>     
@@ -56,8 +47,14 @@ const Scan = () => {
                 }}
                 onError={ handleErr }
                 onScan={ handleScan }
-                facingMode={facingMode}
+                facingMode={
+                    // IOS
+                    isCamera ? 'environment' : 'user'
+                }
             />
+            <button
+                onClick={ () => setIsCamera(!isCamera) }
+            >Change</button>
         </div>
     </Section>
   )
