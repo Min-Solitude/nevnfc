@@ -46,6 +46,7 @@ const Scan = () => {
                 }}
                 onError={ handleErr }
                 onScan={ handleScan }
+                facingMode="environment"
             />
         </div>
     </Section>
