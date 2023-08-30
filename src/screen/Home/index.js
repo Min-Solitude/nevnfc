@@ -40,7 +40,7 @@ const dataCard = [
 
 const Home = () => {
   return (
-    <div className='min-h-screen bg-white flex relative justify-center items-center'>
+    <div className='h-screen bg-white flex relative justify-center items-center'>
       {
         dataCard.map((item, index) => 
           item.cardPosition ? (

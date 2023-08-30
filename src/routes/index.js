@@ -10,7 +10,7 @@ const publicRoutes= [
     {
         path: config.routes.home,
         component: Home,
-        layout: MainLayout
+        layout: null
     },
     {
         path: config.routes.ticket,

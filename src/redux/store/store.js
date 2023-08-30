@@ -1,0 +1,44 @@
+import { combineReducers, configureStore, getDefaultMiddleware } from '@reduxjs/toolkit'
+import { connectRouter, routerMiddleware } from 'connected-react-router'
+import {
+    FLUSH,
+    PAUSE,
+    PERSIST,
+    PURGE,
+    REGISTER,
+    REHYDRATE,
+    persistReducer,
+    persistStore
+} from 'redux-persist'
+import autoMergeLevel2 from 'redux-persist/es/stateReconciler/autoMergeLevel2'
+import storage from 'redux-persist/lib/storage'
+import { TicketReducer } from '../reducers/ticket.recuder'
+import history from './history'
+
+const rootReducer = combineReducers({
+    router: connectRouter(history),
+    ticket: TicketReducer,
+})
+
+
+const persistConfig = {
+    key: 'root',
+    storage,
+    stateReconciler: autoMergeLevel2
+}
+
+const persistedReducer = persistReducer(persistConfig, rootReducer)
+
+const store = configureStore({
+    reducer: persistedReducer,
+    middleware: [
+      ...getDefaultMiddleware({
+        serializableCheck: false,
+      }),
+      routerMiddleware(history) 
+    ]    
+  })
+
+export const persistor = persistStore(store)
+
+export default store
