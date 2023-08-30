@@ -40,6 +40,7 @@ const Scan = () => {
     <Section className={`min-h-screen flex flex-col gap-4 flex justify-center items-center`}>     
         <h1>SCAN QR V1</h1>  
         <div className='w-[full] h-[30rem] overflow-hidden'>
+        <video playsInline>
             <QrReader
                 delay={ 100 }
                 style={{
@@ -52,6 +53,7 @@ const Scan = () => {
                     isCamera ? 'environment' : 'user'
                 }
             />
+        </video>
         </div>
         <button
             onClick={ () => setIsCamera(!isCamera) }
