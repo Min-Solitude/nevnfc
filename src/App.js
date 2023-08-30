@@ -1,23 +1,38 @@
-import logo from './logo.svg';
-import './App.css';
+import { Suspense } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { publicRoutes } from "./routes";
+import MainLayout from "./layouts/MainLayout";
 
 function App() {
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <Suspense fallback={'Loading...'}>
+                <BrowserRouter>
+                    <Routes>
+                        {publicRoutes.map((route, index) => {
+                            let Layout = MainLayout
+                            if (route.layout) {
+                                Layout = route.layout
+                            } else if (route.layout === null) {
+                                Layout = (props) => <>{props.children}</>
+                            }
+                            const Page = route.component
+
+                            return (
+                                <Route
+                                    key={index}
+                                    path={route.path}
+                                    element={
+                                        <Layout>
+                                            <Page />
+                                        </Layout>
+                                    }
+                                />
+                            )
+                        })}
+                    </Routes>
+                </BrowserRouter>
+            </Suspense>
     </div>
   );
 }
