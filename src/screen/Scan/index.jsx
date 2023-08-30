@@ -6,6 +6,7 @@ import Swal from 'sweetalert2';
 const Scan = () => {
 
     const [scanSuccess, setScanSuccess] = useState(false);
+    const [isCameraFront, setIsCameraFront] = useState(false);
 
     const handleScan = async (data) => {
         if(data?.text) {
@@ -46,10 +47,15 @@ const Scan = () => {
                 }}
                 onError={ handleErr }
                 onScan={ handleScan }
-                // Get the phone's back cam
-                facingMode='front'
+                // Get the phone's back camera by default
+                facingMode={isCameraFront}
+
+                
             />
         </div>
+        <button
+            onClick={() => setIsCameraFront(!isCameraFront)}
+        >Change Camera</button>
     </Section>
   )
 }
