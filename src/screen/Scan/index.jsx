@@ -8,26 +8,26 @@ const Scan = () => {
     const [scanSuccess, setScanSuccess] = useState(false);
 
     const handleScan = async (data) => {
-        // if(data?.text) {
-        //     setScanSuccess(true);
+        if(data?.text) {
+            setScanSuccess(true);
 
-        //     try {
-        //         Swal.fire(
-        //             'Vé hợp lệ!',
-        //             '',
-        //             'success'
-        //         ).then(e => setScanSuccess(false));
-        //     }catch(e) {
-        //         console.log(e);
-        //         Swal.fire(
-        //             'Vé không hợp lệ!',
-        //             '',
-        //             'error'
-        //         ).then(e => setScanSuccess(false));
-        //     }
+            try {
+                Swal.fire(
+                    'Vé hợp lệ!',
+                    '',
+                    'success'
+                ).then(e => setScanSuccess(false));
+            }catch(e) {
+                console.log(e);
+                Swal.fire(
+                    'Vé không hợp lệ!',
+                    '',
+                    'error'
+                ).then(e => setScanSuccess(false));
+            }
 
            
-        // };
+        };
     }
 
     const handleErr = (err) => {
@@ -38,14 +38,16 @@ const Scan = () => {
   return (
     <Section className={`min-h-screen bg-pink-400 flex justify-center items-center`}>     
         <h1>SCAN QR</h1>  
-        <QrReader
-            delay={ 100 }
-            style={{
-                width: '100%',
-            }}
-            onError={ handleErr }
-            onScan={ handleScan }
-        />
+        <div className='w-[full] h-[30rem] overflow-hidden'>
+            <QrReader
+                delay={ 100 }
+                style={{
+                    width: '100%',
+                }}
+                onError={ handleErr }
+                onScan={ handleScan }
+            />
+        </div>
     </Section>
   )
 }
