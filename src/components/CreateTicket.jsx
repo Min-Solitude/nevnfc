@@ -1,11 +1,21 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import IonIcon from '@reacticons/ionicons'
+import { useDispatch, useSelector } from 'react-redux'
+import { createTicket } from '../redux/reducers/ticket.recuder'
+import Loading from './Loading'
 
 const CreateTicket = ({ close }) => {
     const [chooseLayout, setChooseLayout] = React.useState(0)
     const [isMobile, setIsMobile] = React.useState(false)
     const [changeLayoutInMobile, setChangeLayoutInMobile] = React.useState(0)
+
+    const [image, setImage] = React.useState(null)
+    const [title, setTitle] = React.useState('')
+    const [description, setDescription] = React.useState('')
+
+    const dispatch = useDispatch()
+    const createdTicket = useSelector((state) => state.ticket.isLoading)
 
     const checkMobile = () => {
         if (window.innerWidth <= 768) {
@@ -23,29 +33,78 @@ const CreateTicket = ({ close }) => {
         }
     }, [isMobile])
 
+    const handleSetImageUrl = (e) => {
+        if (e.target.files[0]) {
+            setImage(e.target.files[0])
+        }
+    }
+
+    const handleCreateTicket = () => {
+        const formData = {
+            title,
+            description,
+            image,
+            layout: chooseLayout
+        }
+
+        dispatch(createTicket(formData))
+
+        if (createdTicket) {
+            return <Loading />
+        } else {
+            setChooseLayout(0)
+            setChangeLayoutInMobile(0)
+            close()
+            setImage(null)
+        }
+    }
+
     if (chooseLayout !== 0) {
         return (
             <div className='fixed top-0 left-0 bottom-0 p-4 lg:p-0 right-0 bg-[#ffffff] flex justify-center items-center z-50'>
+                <motion.button
+                    className='absolute flex rounded-lg p-1 justify-center items-center top-4 left-4 background-gradient'
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => {
+                        setChooseLayout(0)
+                        setChangeLayoutInMobile(0)
+                        close()
+                        setImage(null)
+                    }}
+                >
+                    <IonIcon name='close-outline' className='text-[1.8rem] text-white' />
+                </motion.button>
                 <div className='flex w-full flex-col  lg:items-center gap-2 p-2'>
                     <h1 className='text-[1.2rem] font-bold text-gray-700 lg:mb-4'>Create ticket</h1>
-                    <input type='file' id='image' className='hidden' />
+                    <input accept='image/*' onChange={handleSetImageUrl} type='file' id='image' className='hidden' />
                     {chooseLayout === 1 ? (
                         <div className='w-full shadow-md lg:w-[28rem] cursor-pointer duration-200 rounded-lg  flex gap-2 bg-gray-100 p-2'>
                             <label
                                 htmlFor='image'
                                 className='w-[8rem] hover:brightness-90 duration-200 cursor-pointer rounded-lg h-[8rem] bg-white flex justify-center items-center'
                             >
-                                <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                                {image ? (
+                                    <img
+                                        src={URL.createObjectURL(image)}
+                                        className='w-full h-full object-cover rounded-lg'
+                                    />
+                                ) : (
+                                    <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                                )}
                             </label>
                             <div className='flex flex-1 gap-2 flex-col'>
                                 <input
                                     type='text'
                                     placeholder='Title'
                                     className='rounded-lg bg-white py-2 px-4 text-[0.9rem] outline-none w-full'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                                 <textarea
                                     placeholder='Description'
                                     className='rounded-lg py-2 px-4 outline-none h-full text-[0.8rem] font-light w-full'
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 ></textarea>
                             </div>
                         </div>
@@ -54,16 +113,27 @@ const CreateTicket = ({ close }) => {
                             htmlFor='image'
                             className='lg:w-[28rem] shadow-md h-[12rem] w-full cursor-pointer rounded-lg bg-gray-100 p-2bg-gray-100 p-2 relative flex justify-end items-start'
                         >
-                            <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                            {image ? (
+                                <img
+                                    src={URL.createObjectURL(image)}
+                                    className='w-full h-full object-cover rounded-lg'
+                                />
+                            ) : (
+                                <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                            )}
                             <div className=' absolute bottom-5 left-4 flex flex-col gap-2'>
                                 <input
                                     type='text'
                                     placeholder='Title'
-                                    className='py-1 px-2 text-[0.9rem] rounded-lg outline-none bg-white'
+                                    className='py-1 px-2 border border-gray-300 text-[0.9rem] rounded-lg outline-none bg-white'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                                 <textarea
                                     placeholder='Description'
-                                    className='outline-none px-2 rounded-lg h-full text-[0.8rem] font-light bg-white'
+                                    className='outline-none border border-gray-300 px-2 rounded-lg h-full text-[0.8rem] font-light bg-white'
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 ></textarea>
                             </div>
                         </label>
@@ -74,16 +144,27 @@ const CreateTicket = ({ close }) => {
                                     htmlFor='image'
                                     className='w-full duration-200 hover:brightness-75 cursor-pointer rounded-lg h-[20rem] bg-white flex justify-center items-center'
                                 >
-                                    <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                                    {image ? (
+                                        <img
+                                            src={URL.createObjectURL(image)}
+                                            className='w-full h-full object-cover rounded-lg'
+                                        />
+                                    ) : (
+                                        <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                                    )}
                                 </label>
                                 <input
                                     type='text'
                                     placeholder='Title'
                                     className='rounded-lg bg-white py-2 px-4 text-[0.9rem] outline-none w-full'
+                                    value={title}
+                                    onChange={(e) => setTitle(e.target.value)}
                                 />
                                 <textarea
                                     placeholder='Description'
                                     className='rounded-lg py-2 px-4 outline-none h-full text-[0.8rem] font-light w-full'
+                                    value={description}
+                                    onChange={(e) => setDescription(e.target.value)}
                                 ></textarea>
                             </div>
                         </div>
@@ -93,21 +174,39 @@ const CreateTicket = ({ close }) => {
                                 htmlFor='image'
                                 className=' rounded-lg cursor-pointer w-full lg:w-[25rem] lg:h-[30rem] duration-200 flex justify-center items-center relative bg-gray-100 h-[20rem] p-2 flex flex-col gap-2'
                             >
-                                <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
-                                <div className='absolute top-4 lg:w-[20rem] left-4 flex flex-col gap-2'>
+                                {image ? (
+                                    <img
+                                        src={URL.createObjectURL(image)}
+                                        className='w-full h-full object-cover rounded-lg'
+                                    />
+                                ) : (
+                                    <IonIcon name='image-outline' className='text-[2rem] text-gray-400' />
+                                )}
+                                <div className='absolute top-4   lg:w-[20rem] left-4 flex flex-col gap-2'>
                                     <input
                                         type='text'
                                         placeholder='Title'
-                                        className='rounded-lg bg-white py-2 px-4 text-[0.9rem] outline-none w-full'
+                                        className='rounded-lg border border-gray-300 bg-white py-2 px-4 text-[0.9rem] outline-none w-full'
+                                        value={title}
+                                        onChange={(e) => setTitle(e.target.value)}
                                     />
                                     <textarea
                                         placeholder='Description'
-                                        className='rounded-lg py-2 px-4 outline-none h-full text-[0.8rem] font-light w-full'
+                                        className='rounded-lg border border-gray-300 py-2 px-4 outline-none h-full text-[0.8rem] font-light w-full'
+                                        value={description}
+                                        onChange={(e) => setDescription(e.target.value)}
                                     ></textarea>
                                 </div>
                             </label>
                         </div>
                     )}
+                    <motion.button
+                        whileTap={{ scale: 0.95 }}
+                        className='mt-4 background-gradient text-[0.9rem] text-white p-2 rounded-lg'
+                        onClick={handleCreateTicket}
+                    >
+                        Create
+                    </motion.button>
                 </div>
             </div>
         )
@@ -120,6 +219,18 @@ const CreateTicket = ({ close }) => {
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5 }}
         >
+            <motion.button
+                className='absolute flex rounded-lg p-1 justify-center items-center top-4 left-4 background-gradient'
+                whileTap={{ scale: 0.9 }}
+                onClick={() => {
+                    setChooseLayout(0)
+                    setChangeLayoutInMobile(0)
+                    close()
+                    setImage(null)
+                }}
+            >
+                <IonIcon name='close-outline' className='text-[1.8rem] text-white' />
+            </motion.button>
             {isMobile ? (
                 <div className='w-full flex flex-col gap-4'>
                     <div className=''>

@@ -12,7 +12,7 @@ const Scan = () => {
             setScanSuccess(true)
 
             try {
-                Swal.fire(`Vé hợp lệ! ${data.text}`, '', 'success').then((e) => setScanSuccess(false))
+                Swal.fire(`Vé hợp lệ!`, '', 'success').then((e) => setScanSuccess(false))
             } catch (e) {
                 console.log(e)
                 Swal.fire('Vé không hợp lệ!', '', 'error').then((e) => setScanSuccess(false))
