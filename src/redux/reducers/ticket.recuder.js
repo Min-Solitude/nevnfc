@@ -1,16 +1,12 @@
 import { createAsyncThunk, createSlice } from '@reduxjs/toolkit'
 
-const initialState = {
-    
-}
+const initialState = {}
 
 const reducer = createSlice({
     name: 'ticket',
     initialState,
     reducers: {},
-    extraReducers: (builder) => {
-      
-    }
+    extraReducers: (builder) => {}
 })
 
 export const TicketAction = reducer.actions

@@ -1,12 +1,12 @@
-import { Suspense } from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import { publicRoutes } from "./routes";
-import MainLayout from "./layouts/MainLayout";
+import { Suspense } from 'react'
+import { BrowserRouter, Route, Routes } from 'react-router-dom'
+import { publicRoutes } from './routes'
+import MainLayout from './layouts/MainLayout'
 
 function App() {
-  return (
-    <div className="App">
-    <Suspense fallback={'Loading...'}>
+    return (
+        <div className='App'>
+            <Suspense fallback={'Loading...'}>
                 <BrowserRouter>
                     <Routes>
                         {publicRoutes.map((route, index) => {
@@ -33,8 +33,8 @@ function App() {
                     </Routes>
                 </BrowserRouter>
             </Suspense>
-    </div>
-  );
+        </div>
+    )
 }
 
-export default App;
+export default App

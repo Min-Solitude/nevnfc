@@ -2,7 +2,7 @@ const routes = {
     // AUTH
     home: '/',
     ticket: '/ticket',
-    scan: '/scan',
+    scan: '/scan'
 }
 
 export default routes

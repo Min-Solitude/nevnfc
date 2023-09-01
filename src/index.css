@@ -9,6 +9,23 @@ body {
     font-family: 'Poppins', sans-serif;
 }
 
+/* CUSTOM SCROLLBAR */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 .limit {
     overflow: hidden;
     display: -webkit-box;
@@ -27,5 +44,14 @@ body {
 }
 
 .banner-gradient {
-    background-image: linear-gradient(45deg, #0072ff, #00d2e8 17%, #04fd8f 34%, #70fd6c 51%, #dae11e 68%, #ff9346 85%, #ff62c6);
+    background-image: linear-gradient(
+        45deg,
+        #0072ff,
+        #00d2e8 17%,
+        #04fd8f 34%,
+        #70fd6c 51%,
+        #dae11e 68%,
+        #ff9346 85%,
+        #ff62c6
+    );
 }
