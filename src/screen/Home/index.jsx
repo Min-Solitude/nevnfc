@@ -54,7 +54,7 @@ const Home = () => {
                     <motion.button
                         className='banner-gradient p-1 rounded-full'
                         whileTap={{ scale: 0.9 }}
-                        onClick={() => navigate('/m/nevticket')}
+                        onClick={() => navigate('/ticket')}
                     >
                         <div className='bg-white rounded-full py-2 px-6'>Get started</div>
                     </motion.button>
