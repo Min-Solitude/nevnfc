@@ -62,6 +62,10 @@ export const getTickets = createAsyncThunk('ticket/getTickets', async () => {
     return listTickets
 })
 
+export const checkIn = createAsyncThunk('ticket/checkIn', async (payload) => {
+    console.log(payload)
+})
+
 const reducer = createSlice({
     name: 'ticket',
     initialState,

@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Section from '../../motion/Section'
 import QrReader from 'react-qr-scanner'
 import Swal from 'sweetalert2'
+import { motion } from 'framer-motion'
 
 const Scan = () => {
     const [scanSuccess, setScanSuccess] = useState(false)
@@ -12,7 +13,7 @@ const Scan = () => {
             setScanSuccess(true)
 
             try {
-                Swal.fire(`Vé hợp lệ! ${data.text}`, '', 'success').then((e) => setScanSuccess(false))
+                console.log(data.text)
             } catch (e) {
                 console.log(e)
                 Swal.fire('Vé không hợp lệ!', '', 'error').then((e) => setScanSuccess(false))
@@ -25,8 +26,8 @@ const Scan = () => {
     }
 
     return (
-        <Section className={`h-screen flex flex-col gap-4 flex p-2  items-center`}>
-            <h1 className='font-bold text-[1.8rem] mt-8'>SCAN TICKET 2</h1>
+        <Section className={` flex flex-col gap-4 flex p-1  items-center`}>
+            <h1 className='font-bold text-[1.6rem] mt-8'>SCAN TICKET </h1>
             <div className='banner-gradient p-2 rounded-lg'>
                 <div className='w-[full] rounded-lg overflow-hidden'>
                     <QrReader
@@ -43,7 +44,6 @@ const Scan = () => {
                     />
                 </div>
             </div>
-            <button onClick={() => setIsCamera(!isCamera)}>Change</button>
         </Section>
     )
 }

@@ -44,7 +44,7 @@ const DetailTicket = ({ title, description, id, close, photoURL, layout, status 
                     </motion.button>
                 </div>
                 {isShowQRCode ? (
-                    <div className='flex mt-4 justify-center '>
+                    <div className='flex mt-4 justify-center mb-8 '>
                         <div className=' banner-gradient p-2 rounded-lg'>
                             <QRCode value={id} className='rounded-lg shadow-sm' />
                         </div>
