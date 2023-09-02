@@ -26,7 +26,7 @@ const Scan = () => {
 
     return (
         <Section className={`h-screen flex flex-col gap-4 flex p-2  items-center`}>
-            <h1 className='font-bold text-[1.8rem] mt-8'>SCAN TICKET</h1>
+            <h1 className='font-bold text-[1.8rem] mt-8'>SCAN TICKET 2</h1>
             <div className='banner-gradient p-2 rounded-lg'>
                 <div className='w-[full] rounded-lg overflow-hidden'>
                     <QrReader
