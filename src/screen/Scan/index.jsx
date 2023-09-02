@@ -25,21 +25,23 @@ const Scan = () => {
     }
 
     return (
-        <Section className={`min-h-screen flex flex-col gap-4 flex justify-center items-center`}>
-            <h1>SCAN QR V1</h1>
-            <div className='w-[full] h-[30rem] overflow-hidden'>
-                <QrReader
-                    delay={100}
-                    style={{
-                        width: '100%'
-                    }}
-                    onError={handleErr}
-                    onScan={handleScan}
-                    facingMode={
-                        // IOS
-                        isCamera ? 'front' : 'near'
-                    }
-                />
+        <Section className={`h-screen flex flex-col gap-4 flex p-2  items-center`}>
+            <h1 className='font-bold text-[1.8rem] mt-8'>SCAN TICKET</h1>
+            <div className='banner-gradient p-2 rounded-lg'>
+                <div className='w-[full] rounded-lg overflow-hidden'>
+                    <QrReader
+                        delay={100}
+                        style={{
+                            width: '100%'
+                        }}
+                        onError={handleErr}
+                        onScan={handleScan}
+                        facingMode={
+                            // IOS
+                            isCamera ? 'front' : 'near'
+                        }
+                    />
+                </div>
             </div>
             <button onClick={() => setIsCamera(!isCamera)}>Change</button>
         </Section>
