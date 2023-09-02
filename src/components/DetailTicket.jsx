@@ -44,7 +44,7 @@ const DetailTicket = ({ title, description, id, close, photoURL, layout, status 
                     </motion.button>
                 </div>
                 {isShowQRCode ? (
-                    <div className='p-2 w-full flex justify-center mt-4 lg:mt-8 rounded-lg mb-8'>
+                    <div className='flex translate-y-[-10%] justify-center'>
                         <QRCode value={id} />
                     </div>
                 ) : (
