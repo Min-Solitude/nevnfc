@@ -7,7 +7,7 @@ import { motion } from 'framer-motion'
 const DetailTicket = ({ title, description, id, close, photoURL, layout, status }) => {
     const [isShowQRCode, setIsShowQRCode] = React.useState(false)
     return (
-        <Section className={`fixed top-0 left-0 w-full h-full overflow-y-scrol  bg-white z-50`}>
+        <Section className={` bg-white`}>
             <div className='lg:w-[50%] lg:m-auto lg:mt-8 l relative lg:rounded-xl lg:shadow-md lg:bg-gray-100 xl:w-[30%]'>
                 <motion.button
                     whileTap={{ scale: 0.9 }}
@@ -44,14 +44,16 @@ const DetailTicket = ({ title, description, id, close, photoURL, layout, status 
                     </motion.button>
                 </div>
                 {isShowQRCode ? (
-                    <div className='flex translate-y-[-10%] justify-center'>
-                        <QRCode value={id} />
+                    <div className='flex mt-4 justify-center '>
+                        <div className=' banner-gradient p-2 rounded-lg'>
+                            <QRCode value={id} className='rounded-lg shadow-sm' />
+                        </div>
                     </div>
                 ) : (
                     <>
-                        <div className='px-2 mt-2 text-[0.9rem] font-light flex flex-col'>
+                        <div className='px-2 mt-2 text-[0.9rem] font-light mb-8 flex flex-col'>
                             <span className='font-bold'>Description:</span>
-                            <textarea className='mt-2 h-[20rem]' value={description} readOnly />
+                            <p className='mt-2 '>{description}</p>
                         </div>
                     </>
                 )}

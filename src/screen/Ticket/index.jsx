@@ -21,6 +21,20 @@ const Ticket = () => {
         dispatch(getTickets())
     }, [])
 
+    if (isDetailTicket !== null) {
+        return (
+            <DetailTicket
+                id={isDetailTicket.id}
+                close={() => setIsDetailTicket(null)}
+                title={isDetailTicket.title}
+                description={isDetailTicket.description}
+                photoURL={isDetailTicket.photoURL}
+                layout={isDetailTicket.layout}
+                status={isDetailTicket.status}
+            />
+        )
+    }
+
     return (
         <Section className={` w-full lg:w-[60%] xl:w-[40%] lg:m-auto p-2  `}>
             <Banner />
@@ -146,17 +160,7 @@ const Ticket = () => {
                     </div>
                 </div>
             </div>
-            {isDetailTicket !== null && (
-                <DetailTicket
-                    id={isDetailTicket.id}
-                    close={() => setIsDetailTicket(null)}
-                    title={isDetailTicket.title}
-                    description={isDetailTicket.description}
-                    photoURL={isDetailTicket.photoURL}
-                    layout={isDetailTicket.layout}
-                    status={isDetailTicket.status}
-                />
-            )}
+
             {isCreateTicket && <CreateTicket close={() => setIsCreateTicket(false)} />}
         </Section>
     )
