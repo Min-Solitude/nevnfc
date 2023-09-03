@@ -19,9 +19,9 @@ export const dataCard = [
         cardPosition: false,
         top: '30%',
         icon: 'wifi',
-        title: 'Ticket event',
+        title: 'Nfc',
         description: 'Event ticket management. Create and check in tickets right in your wallet!',
-        link: '/ticket'
+        link: '/nfc'
     },
     {
         cardPosition: false,

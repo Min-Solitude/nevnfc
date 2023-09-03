@@ -1,6 +1,7 @@
 import config from '../configs'
 import MainLayout from '../layouts/MainLayout'
 import Home from '../screen/Home'
+import NFC from '../screen/Nfc'
 import Scan from '../screen/Scan'
 import Ticket from '../screen/Ticket'
 
@@ -19,6 +20,11 @@ const publicRoutes = [
     {
         path: config.routes.scan,
         component: Scan,
+        layout: MainLayout
+    },
+    {
+        path: config.routes.nfc,
+        component: NFC,
         layout: MainLayout
     }
 ]
